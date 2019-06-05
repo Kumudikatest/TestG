@@ -1,1 +1,77 @@
-{"EDITOR_STATE":{"allProjectFiles":{"adc234e9-a61a-4588-ba4c-97004b2e5802":{"id":"adc234e9-a61a-4588-ba4c-97004b2e5802","parent":null,"name":"TestG","type":"DIRECTORY","isDirectory":true,"children":["0fe9987d-c0e3-4941-83c8-1f3c75e65079","fab2b668-0c93-45b8-ab11-c354c473ef77"],"isRemovable":false,"filePath":"TestG"},"0fe9987d-c0e3-4941-83c8-1f3c75e65079":{"id":"0fe9987d-c0e3-4941-83c8-1f3c75e65079","parent":"adc234e9-a61a-4588-ba4c-97004b2e5802","name":"function.js","type":"LAMBDA_FILE","isDirectory":false,"children":[],"isRemovable":true,"filePath":"TestG/function.js","code":"let google = require('googleapis').google;\nlet _auth = require('./Authorizer');\nconst storage = google.storage('v1');\n\nexports.handler = function (request, response) {\n    storage.objects.list({\n        bucket: 'test_sigma_gcp_storage',\n        maxResults: 10,\n        prefix: ''\n    })\n        .then(response => {\n            console.log(response.data);           // successful response\n            /*\n    \n            WARNING: response.data.items will be missing altogether (instead of being empty) if there are no matches!  \n    \n            response.data = {\n                \"kind\": \"storage#objects\",\n                \"items\": [\n                    {\n                        \"kind\": \"storage#object\",\n                        \"id\": \"<bucket>/<object>/<timestamp>\",\n                        \"selfLink\": \"https://www.googleapis.com/storage/v1/b/<bucket>/o/<object>\",\n                        \"name\": \"<object>\",\n                        \"bucket\": \"<bucket>\",\n                        \"contentType\": \"<content-type>\",\n                        \"timeCreated\": \"<yyyy-MM-ddTHH:mm:ss.###Z>\",\n                        \"updated\": \"<yyyy-MM-ddTHH:mm:ss.###Z>\",\n                        \"size\": \"<bytes>\",\n                        \"md5Hash\": \"<hash>\",\n                        \"metadata\": {\n                            \"<key1>\": \"<val1>\",\n                            \"<key2>\": \"<val2>\"\n                        },\n                        \"crc32c\": \"<crc>\",\n                        \"etag\": \"<etag>\"\n                        // , ...\n                    }\n                    // , ...\n                ]\n            }\n            */\n        })\n        .catch(err => {\n            console.log(err, err.stack); // an error occurred\n        });\n\n    response.send({ \"message\": \"Successfully executed\" });\n}","triggers":[{"resourceName":"http-trigger","config":{}}],"config":{"runtime":"nodejs8.10","timeout":60,"memory":128,"triggerType":0}},"e18d17dd-1c78-48ed-b947-b96d5e92ccc7":{"id":"e18d17dd-1c78-48ed-b947-b96d5e92ccc7","parent":null,"name":"index.js","type":"JS_FILE","isDirectory":false,"children":[],"isRemovable":true,"filePath":"index.js","code":"// This file is used to register all your cloud functions in GCP.\n// DO NOT EDIT/DELETE THIS, UNLESS YOU KNOW WHAT YOU ARE DOING.\n\nexports.TestGfunction = require(\"./TestG/function.js\").handler;","triggers":[]},"fab2b668-0c93-45b8-ab11-c354c473ef77":{"id":"fab2b668-0c93-45b8-ab11-c354c473ef77","parent":"adc234e9-a61a-4588-ba4c-97004b2e5802","name":"Authorizer.js","type":"JS_FILE","isDirectory":false,"children":[],"isRemovable":true,"filePath":"TestG/Authorizer.js","code":"const google = require(\"googleapis\").google;\n\ngoogle.options({auth: new google.auth.Compute()});","triggers":[]}},"deletedFiles":[],"rootNode":"adc234e9-a61a-4588-ba4c-97004b2e5802","openFiles":["0fe9987d-c0e3-4941-83c8-1f3c75e65079"],"currentFileId":"0fe9987d-c0e3-4941-83c8-1f3c75e65079","resources":{"http-trigger":{"name":"http-trigger","type":"http-trigger","config":{},"globallyEditable":false},"storagetestsigmagcpstorage":{"name":"storagetestsigmagcpstorage","type":"storage","config":{"mode":1,"bucket":{"name":"test_sigma_gcp_storage"}},"globallyEditable":false}},"envVariables":[],"packageJSON":{"dependencies":{"googleapis":{"name":"googleapis","version":"29.0.0","notRemovable":false}}},"lambdaId":"0fe9987d-c0e3-4941-83c8-1f3c75e65079"},"PROJECT_META":{"projectName":"TestG","projectDescription":"","projectVersion":"1.0.0","projectRegion":"us-east1","platform":"GCP","lastSave":1540445130120},"VCS_STATE":{"provider":"GitHub","repo":{"name":"TestG","url":"https://github.com/Kumudikatest/TestG"}}}
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "4499d64a-4700-4f01-bf9f-46b2b6a87b97": {
+        "id": "4499d64a-4700-4f01-bf9f-46b2b6a87b97",
+        "parent": null,
+        "name": "TestG",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "2c45015a-2b36-488e-9823-cd543647c30e"
+        ],
+        "isRemovable": false,
+        "filePath": "TestG"
+      },
+      "2c45015a-2b36-488e-9823-cd543647c30e": {
+        "id": "2c45015a-2b36-488e-9823-cd543647c30e",
+        "parent": "4499d64a-4700-4f01-bf9f-46b2b6a87b97",
+        "name": "lambda.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "TestG/lambda.js",
+        "code": "exports.handler = function(event, context, callback) {\n    //Kumudika commit lambda file\n    callback(null, {\"message\": \"Successfully executed\"});\n}",
+        "config": {
+          "runtime": "nodejs8.10",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": []
+      }
+    },
+    "deletedFiles": [],
+    "rootNode": "4499d64a-4700-4f01-bf9f-46b2b6a87b97",
+    "openFiles": [
+      "2c45015a-2b36-488e-9823-cd543647c30e"
+    ],
+    "currentFileId": "2c45015a-2b36-488e-9823-cd543647c30e",
+    "resources": {},
+    "customTemplate": {
+      "dialect": null,
+      "definitions": {}
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {}
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "TestG",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1559730652874
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "TestG",
+      "url": "https://github.com/Kumudikatest/TestG"
+    }
+  }
+}
